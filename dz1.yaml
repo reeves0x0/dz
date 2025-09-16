@@ -1,0 +1,29 @@
+user:
+  isAdmin: true                # Админ или нет
+  name: "Иван Белоусов"          # Имя
+  age: 30                      # Возраст
+  position: "DevOps Engineer"  # Должность
+  skills:                      # Массив навыков
+    - name: "Kubernetes"
+      level: 5
+      description: |
+        Опыт администрирования кластеров K8s.
+        Настройка CI/CD пайплайнов и GitOps.
+    - name: "Linux"
+      level: 4
+      description: |
+        Уверенное владение системами семейства Debian.
+        Настройка сетей, системных сервисов и безопасности.
+  residence:                    # Место жительства
+    country: "Россия"
+    city: "Санкт-Петербург"
+    street: "Ленинградский проспект"
+    house: 25
+    apartment: 84
+  pets:                         # Массив домашних животных
+    - name: "Барсик"
+      breed: "дворовая коротколапая"
+      canMeow: true
+    - name: "Шарик"
+      breed: "Дворняга"
+      canMeow: false
