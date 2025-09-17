@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: conv-app-port
+spec:
+  type: NodePort
+  ports:
+    - port: 3000 # это порт что бы другие поды могли общаться с этим
+      targetPort: 80 # порт nginx внутри пода\контейнера
+      nodePort: 31222 # по этому порту будет обращаться браузер (резерв 30000-32676)
+  selector:
+    components: frontend-conv-app # привязываем к нашему ПОДу через лэйблы
