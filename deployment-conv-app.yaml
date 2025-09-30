@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conv-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      components: frontend-conv-app
+  template:
+    metadata:
+      labels:
+        components: frontend-conv-app
+    spec:
+      containers:
+        - name: conv-app
+          image: antonlarichev/conv-app:latest
+          imagePullPolicy: Always  # IfNotPresent  Never
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
