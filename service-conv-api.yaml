@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: conv-api-clusterip        #  чтобы совпадало с ingress
+  name: conv-api-clusterip        # обы совпадало с ingress
 spec:
   type: ClusterIP
   selector:
