@@ -26,29 +26,29 @@ spec:
                   name: conv-api-secret
                   key: DATABASE_URL
 
-            - name: AMQPEXCHANGE
+            - name: AMQP_EXCHANGE
               valueFrom:
                 secretKeyRef:
                   name: conv-api-secret
-                  key: AMQPEXCHANGE
+                  key: AMQP_EXCHANGE
 
-            - name: AMQPUSER
+            - name: AMQP_USER
               valueFrom:
                 secretKeyRef:
                   name: conv-api-secret
-                  key: AMQPUSER
+                  key: AMQP_USER
 
-            - name: AMQPPASSWORD
+            - name: AMQP_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: conv-api-secret
-                  key: AMQPPASSWORD
+                  key: AMQP_PASSWORD
 
-            - name: AMQPHOSTNAME
+            - name: AMQP_HOSTNAME
               valueFrom:
                 secretKeyRef:
                   name: conv-api-secret
-                  key: AMQPHOSTNAME
+                  key: AMQP_HOSTNAME
 
           resources:
             limits:
@@ -57,7 +57,7 @@ spec:
 
           volumeMounts:
             - name: api-data
-              mountPath: /opt/app/uploads    # как требует задание
+              mountPath: /opt/app/uploads   # как требует задание
               subPath: api
 
       volumes:
