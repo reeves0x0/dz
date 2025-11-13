@@ -57,7 +57,7 @@ spec:
 
           volumeMounts:
             - name: api-data
-              mountPath: /opt/app/uploads   # как требует задание
+              mountPath: /opt/app/uploads   #к требует задание
               subPath: api
 
       volumes:
