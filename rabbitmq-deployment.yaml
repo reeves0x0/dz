@@ -16,25 +16,37 @@ spec:
         - name: rabbitmq
           image: rabbitmq:3.13.7-management
           ports:
-            - containerPort: 5672    # AMQP
-            - containerPort: 15672   # Management web UI
+            - containerPort: 5672
+            - containerPort: 15672
           env:
             - name: SEED_USERNAME
-              value: demo
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: SEED_USERNAME
+
             - name: SEED_USER_PASSWORD
-              value: demo
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: SEED_USER_PASSWORD
+
             - name: RABBITMQ_DEFAULT_USER
               value: "$(SEED_USERNAME)"
+
             - name: RABBITMQ_DEFAULT_PASS
               value: "$(SEED_USER_PASSWORD)"
+
           resources:
             limits:
               memory: "800Mi"
               cpu: "1000m"
+
           volumeMounts:
             - name: rabbitmq-data
               mountPath: /var/lib/rabbitmq/
               subPath: rabbitmq
+
       volumes:
         - name: rabbitmq-data
           persistentVolumeClaim:

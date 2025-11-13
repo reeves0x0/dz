@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: api-nfs-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /srv/nfs/k8s-data/api-data   # путь на NFS-сервере, а не на воркерах (папка должна быть!!Ы)
+    server: 10.101.1.14                     # IP твоего NFS
