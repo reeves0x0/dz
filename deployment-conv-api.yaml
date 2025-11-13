@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conv-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      components: backend-conv-app
+  template:
+    metadata:
+      labels:
+        components: backend-conv-app
+    spec:
+      containers:
+        - name: conv-api
+          image: antonlarichev/conv-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: conv-api-secret
+                  key: DATABASE_URL
+
+            - name: AMQP_EXCHANGE
+              valueFrom:
+                secretKeyRef:
+                  name: conv-api-secret
+                  key: AMQP_EXCHANGE
+
+            - name: AMQP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: conv-api-secret
+                  key: AMQP_USER
+
+            - name: AMQP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: conv-api-secret
+                  key: AMQP_PASSWORD
+
+            - name: AMQP_HOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: conv-api-secret
+                  key: AMQP_HOSTNAME
+
+          resources:
+            limits:
+              memory: "800Mi"
+              cpu: "1000m"
+
+          volumeMounts:
+            - name: api-data
+              mountPath: /opt/app/uploads   # как требует задание
+              subPath: api
+
+      volumes:
+        - name: api-data
+          persistentVolumeClaim:
+            claimName: api-pvc
